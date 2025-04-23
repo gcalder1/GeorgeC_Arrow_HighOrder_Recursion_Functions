@@ -1,4 +1,4 @@
-//Exercise 1: Functions Syntax Practice
+//+++Exercise: Functions Syntax Practice+++//
 
 /*
 1) OG Syntax:
@@ -56,7 +56,7 @@ const number1 = num => {
 
 //const num = num => num % 2 === 0;
 
-//Exercise 2: Implicit Returns
+//+++Exercise : Implicit Returns+++//
 
 const square = x =>  x * x; 
 console.log(square(12345))
@@ -70,7 +70,7 @@ const getMessage = () => "Welcome to JavaScript!";
 console.log(getMessage())
 
 
-//Exercise: Higher Order Functions - filter(), map(), reduce(), and find()
+//+++Exercise: Higher Order Functions - filter(), map(), reduce(), and find()+++//
 
 /* filter + map
 Parameters: We need to filter the array into a new array with only even numbers. 
@@ -101,10 +101,21 @@ even numbers, where all of those even numbers are squared.
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; //input = array of numbers
 
+/* Using code from PPT
+const evenNumbersSquared = numbers => {
+    const evenNumbers = numbers.filter(num => num % 2 === 0);      
+    const squaredNumbers = evenNumbers.map(num => num * num);
+    return squaredNumbers; <-- NEED this to return the value and use it outside of the function
+};
+
+console.log(evenNumbersSquared(numbers));
+*/
+
 const numsFiltered = numbers.filter(num => num % 2 === 0);
 console.log(numsFiltered);
 
 const numsSquared = numsFiltered.map(num => num * num);
+
 console.log(numsSquared); //output = array of numbers that meets parameters
 
 
@@ -138,6 +149,17 @@ Finally, we will console log that variable that will contain that "reduced" amou
 
 const prices = [10.99, 5.49, 12.99, 8.75, 15.20]; //input: array of floats
 
+/* Using supplied code from PPT
+const calculateDiscountedTotal = prices => {
+    const discountPrice = prices.reduce((acc, curr) => {
+        return Math.round((acc + (curr * .8)) * 100) / 100;
+    }, 0);
+    return discountPrice;
+};
+
+console.log(calculateDiscountedTotal(prices));
+*/
+
 const calculateDiscountedTotal = prices.reduce((acc, curr) => {
     // console.log(Math.round((acc + (curr * .8)) * 100) / 100); <-- To see application of function as it iterates
     return Math.round((acc + (curr * .8)) * 100) / 100;
@@ -170,9 +192,135 @@ Finally we would console log the variable contain what was found
 
 const words = ["apple", "banana", "cherry", "date", "elderberry"]; //input: array of strings
 
+/* Using code from PPT
+const findWordWithA = wordsArr => {
+  const wordFound = words.find(word => word.includes("a"));
+  return wordFound;
+};
+
+console.log(findWordWithA(words));
+*/
+
 const wordFound = words.find(word => word.includes("a"));
 
 console.log(wordFound); //output: a single string from the array of strings that meets the criteria of the function
 
-/**/
+//+++Exercise: Factorial+++//
+
+/* 
+Parameter: We want to take a number input from the user and return a number that
+represents the factorial value of the received number
+
+
+Result: The output should be a number that takes the input number and finds the 
+factorial value of the input, therefore outputing a single factorial value.
+
+Example: 
+input: 3 | output: 6 <- Because 3 * 2 * 1
+input: 100 | output: 100 * 99 * 98...
+input: 0 | output: 1 <- because there is one way to arrange nothing, which is just 0
+input: -3 | output: 'Enter a positive number'
+
+Pseudocode: 
+We want to start off by creating a recursive function that will take a number
+and then find the factorial of that number
+    - The function will first check what number we're taking in. If the number
+    we are taking in is 0, then we want it to return 1 because the only way
+    you can arrange nothing is 1 way (!0 = 1)
+    - If we don't receive 0, then we want to go ahead and return the number 
+    that we give to this function and multiply it by the number the function
+    is taking - 1.
+        - The reason we want to do this is because factorials take a number and then
+        multiply it by every other number that comes before it until you reach 0.
+        The way this will happen is thanks to the recursion we're doing by calling
+        the function within itself at the end.
+
+Since we still need a way to receive numbers, to run this function against, we 
+need to create a function that prompts the user to enter a number. That number is what
+we will use for our factorial function.
+
+Next, we still need to create a condition that will stop the recursion. As of right
+now, the function will keep reducing the number given by 1. So we need to create
+a base case that stops the factorial function, which is this case we want the 
+function to stop when the number the user provides is greater than or equal to 0.
+    - If the number we provide is greater than or equal to 0, then we want to
+    create a variable that contains that result of whatever number the user
+    provided with the function applying to that number, and then we console log
+    that variable interpolated into a template literal.
+    - If we do not provide a valid number (like a negative number), then we'll
+    return an "error message"
+
+*/
+
+//Provided Code below: Break down the problem and solution arrived to below using PREPP steps
+
+// program to find the factorial of a number
+// function factorial(x) {
+
+//     // if number is 0
+//     if (x == 0) {
+//         return 1;
+//     }
+
+//     // if number is positive
+//     else {
+//         return x * factorial(x - 1);
+//     }
+// }
+
+// // take input from the user
+// const num = prompt('Enter a positive number: ');
+
+// // calling factorial() if num is positive
+// if (num >= 0) {
+//     const result = factorial(num);
+//     console.log(`The factorial of ${num} is ${result}`);
+// }
+// else {
+//     console.log('Enter a positive number.');
+// }
+
+//+++Exercise: Recusrion - Sum of An Array
+/*
+
+*/
+// const arrayOfNumbers = [1, 2, 3, 4, 5, 6]; could use this
+
+const sumOfArray = (arrayOfNumbers) => {
+    if (arrayOfNumbers.length == 1){
+        console.log(arrayOfNumbers);
+        return arrayOfNumbers[0];
+    }
+    console.log(arrayOfNumbers);
+
+    let accumulator = arrayOfNumbers.pop(); //each pop'd value is stored within this value but not this exact variable. We're storing it within the stack of recursions that this recursion has taken
+    let currentValue = sumOfArray(arrayOfNumbers); //This is essentially the n - 1
+    
+    console.log(accumulator);
+    console.log(currentValue)
+    console.log(`We're taking ${accumulator} and adding it to ${currentValue} to get ${accumulator + currentValue}`);
+    
+
+    return accumulator + currentValue;
+
+    /*
+    its the same as saying:
+
+    return accumulator + sumOfArray(arrayOfNumbers);
+
+    because we're still calling the function within itself, its just stored
+    within a variable. The reason I use my above code structure is to visually
+    relate it to what reduce does to make it easier for me to understand how
+    the structure of this works similar to reduce, just in recursion form.
+
+    We're just storing the calling of the function within a variable. But without
+    the variable, we would just directly add the actual calling back of the function
+    to the accumulator.
+    */
+  }
+
+  console.log(sumOfArray([5, 4, 3, 7, 6, 10]))
+  
+  // Input: [1, 2, 3, 4, 5, 6]
+  // Output: 21
 
