@@ -292,9 +292,9 @@ const sumOfArray = (arrayOfNumbers) => {
         return arrayOfNumbers[0];
     }
 
-    let result = arrayOfNumbers.pop(); //each pop'd value is stored within this value but not this exact variable. We're storing it within the stack of recursions that this recursion has taken        
+    let whereWeAreAt = arrayOfNumbers.pop(); //each pop'd value is stored within this value but not this exact variable. We're storing it within the stack of recursions that this recursion has taken        
 
-    return result + sumOfArray(arrayOfNumbers);
+    return whereWeAreAt + sumOfArray(arrayOfNumbers);
 
   }
 
