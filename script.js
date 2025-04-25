@@ -291,32 +291,11 @@ const sumOfArray = (arrayOfNumbers) => {
         console.log(arrayOfNumbers);
         return arrayOfNumbers[0];
     }
-    console.log(arrayOfNumbers);
 
-    let accumulator = arrayOfNumbers.pop(); //each pop'd value is stored within this value but not this exact variable. We're storing it within the stack of recursions that this recursion has taken
-    let currentValue = sumOfArray(arrayOfNumbers); //This is essentially the n - 1
-    
-    console.log(accumulator);
-    console.log(currentValue)
-    console.log(`We're taking ${accumulator} and adding it to ${currentValue} to get ${accumulator + currentValue}`);
-    
+    let result = arrayOfNumbers.pop(); //each pop'd value is stored within this value but not this exact variable. We're storing it within the stack of recursions that this recursion has taken        
 
-    return accumulator + currentValue;
+    return result + sumOfArray(arrayOfNumbers);
 
-    /*
-    its the same as saying:
-
-    return accumulator + sumOfArray(arrayOfNumbers);
-
-    because we're still calling the function within itself, its just stored
-    within a variable. The reason I use my above code structure is to visually
-    relate it to what reduce does to make it easier for me to understand how
-    the structure of this works similar to reduce, just in recursion form.
-
-    We're just storing the calling of the function within a variable. But without
-    the variable, we would just directly add the actual calling back of the function
-    to the accumulator.
-    */
   }
 
   console.log(sumOfArray([5, 4, 3, 7, 6, 10]))
