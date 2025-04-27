@@ -223,33 +223,47 @@ input: -3 | output: 'Enter a positive number'
 
 Pseudocode: 
 We want to start off by creating a recursive function that will take a number
-and then find the factorial of that number
-    - The function will first check what number we're taking in. If the number
-    we are taking in is 0, then we want it to return 1 because the only way
-    you can arrange nothing is 1 way (!0 = 1)
-    - If we don't receive 0, then we want to go ahead and return the number 
+and then find the factorial of that number. What this really means is that we
+want to make a recursive function that multiplies a number against 1 less of
+itself. And we want to keep doing that until we get to 1, and then we stop.
+    - The function will first have a base case for stopping the recursion. This
+    will check for when we reach 0 in the recursion, and if we do then we'll return
+    1 and then stop the recursion, therefore stopping the loop from continuing.
+    This means that when it gets to 0 in the recursion, that instead of allowing it 
+    to return 0 we instead return 1 since anything times 0 would be 0. 
+    - While we aren't at 0 yet, we want to go ahead and return the number 
     that we give to this function and multiply it by the number the function
     is taking - 1.
         - The reason we want to do this is because factorials take a number and then
         multiply it by every other number that comes before it until you reach 0.
         The way this will happen is thanks to the recursion we're doing by calling
-        the function within itself at the end.
+        the function within itself at the end and subtracting it by 1.
+    - This way, once we reach 0, we then return 1, therefore finalizing the "loop",
+    or in this case the recursion.
+With this function now created, what will happen once the function finishes looping
+is that the call stack will "unwind" by taking all of those results and doing that
+multiplication that we've specified within the else, therefore resolving each item
+in the call stack.
 
 Since we still need a way to receive numbers, to run this function against, we 
-need to create a function that prompts the user to enter a number. That number is what
-we will use for our factorial function.
+need to create a variable that prompts the user to enter a number. That number is what
+we will plug in for our factorial function.
 
-Next, we still need to create a condition that will stop the recursion. As of right
-now, the function will keep reducing the number given by 1. So we need to create
-a base case that stops the factorial function, which is this case we want the 
-function to stop when the number the user provides is greater than or equal to 0.
+However, since we know factorials dont work with negative numbers, we want to make
+sure that the number we are recieving from the user is positive. And so, we want 
+to create a conditional if-else that checks if the number provided by the user
+is greater than or equal to 0.
     - If the number we provide is greater than or equal to 0, then we want to
-    create a variable that contains that result of whatever number the user
-    provided with the function applying to that number, and then we console log
-    that variable interpolated into a template literal.
+    create a variable that takes the input of whatever number the user
+    provided and apply the function to that number, and then we console log
+    that result (via interpolating the user's input and the integer output).
     - If we do not provide a valid number (like a negative number), then we'll
-    return an "error message"
+    return an "error message" via console log.
 
+Therefore, what we should see at the end is one of 3 results:
+    - "1" if the input was "0"
+    - A factorial value from the provided number
+    - An error message to the user for them to enter a valid number
 */
 
 //Provided Code below: Break down the problem and solution arrived to below using PREPP steps
